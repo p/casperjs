@@ -1137,6 +1137,16 @@ Casper.prototype.log = function log(message, level, space) {
     return this;
 };
 
+function formatSelector(selector) {
+  if (typeof selector === 'string') {
+    return selector;
+  }
+  if (typeof selector === 'object') {
+    return '[selector type=' + selector.type + ', path=' + selector.path + ']';
+  }
+  return selector;
+}
+
 /**
  * Emulates an event on the element from the provided selector using the mouse
  * pointer, if possible.
@@ -1152,7 +1162,7 @@ Casper.prototype.mouseEvent = function mouseEvent(type, selector) {
     this.checkStarted();
     this.log("Mouse event '" + type + "' on selector: " + selector, "debug");
     if (!this.exists(selector)) {
-        throw new CasperError(f("Cannot dispatch %s event on nonexistent selector: %s", type, selector));
+        throw new CasperError(f("Cannot dispatch %s event on nonexistent selector: %s", type, formatSelector(selector)));
     }
     if (this.evaluate(function(type, selector) {
         return window.__utils__.mouseEvent(type, selector);
