@@ -1236,7 +1236,7 @@ Casper.prototype.open = function open(location, settings) {
         data:      settings.data
     }, this.page.settings);
     // revert base custom headers
-    this.page.customHeaders = baseCustomHeaders;
+    //this.page.customHeaders = baseCustomHeaders;
     return this;
 };
 
